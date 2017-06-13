@@ -19,10 +19,12 @@ function loadLibs (self) {
 }
 
 class BitbucketAPI {
-    constructor(username, password){
-      if (username || password)
-        this.setAuth(username, password)
-      loadLibs(this)
+    constructor(username, password) {
+        if (username || password) {
+            this.setAuth(username, password);
+        }
+    
+        loadLibs(this);
     }
 
     setAuth(username, password){
