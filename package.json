@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "request": "^2.81.0",
-    "request-promise": "^4.2.1"
+    "request-promise": "^4.2.1",
+    "tempy": "^0.1.0"
   },
   "devDependencies": {
     "argly": "^1.2.0",
