@@ -31,10 +31,10 @@ const args = argly
 
 bitbucket.setAuth(args.user, args.pass)
 
-if (args.repoFile && args.localFile) {
-     bitbucket.commit.create(args.owner, args.repo, args.message, [{repoLocation: args.repoFile, localLocation: args.localFile}]);
+if (args.localFile) {
+    bitbucket.commit.create(args.owner, args.repo, args.message,args.localFile,'lastTimeTesting');
 } else {
-     bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
+    bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
         .then(body => console.log('branch created!'))
 
     bitbucket.pullrequest.create(args.owner,args.repo,'master','TESTINGTESTING','wut a cool pr')
