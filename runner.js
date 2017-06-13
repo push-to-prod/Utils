@@ -27,9 +27,11 @@ const args = argly
 
 bitbucket.setAuth(args.user, args.pass)
 
-/*// projectName/owner, repo, fromBranch, branchName
-bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
-    .then(body => console.log('branch created!'))*/
+// projectName/owner, repo, fromBranch, branchName
+/*bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
+    .then(body => console.log('branch created!'))*!/
 
 bitbucket.pullrequest.create(args.owner,args.repo,'master','TESTINGTESTING','wut a cool pr')
-    .then(body => console.log('pr made!'));
+    .then(body => console.log('pr made!'));*/
+
+bitbucket.get.File(args.owner,args.repo,'master','test.txt').then(response =>{console.log(response)});
