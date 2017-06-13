@@ -2,8 +2,12 @@
   "name": "Utils",
   "version": "0.0.1",
   "dependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+    "argly": "^1.2.0",
     "chai": "^4.0.2",
-    "mocha": "^3.4.2",
-    "request": "^2.81.0"
+    "mocha": "^3.4.2"
   }
 }
