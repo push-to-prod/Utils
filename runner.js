@@ -1,18 +1,22 @@
 const argly = require('argly')
 const bitbucket = require('.')
-
 const REQUIRED_ARGS = [ 'user', 'pass', 'owner', 'repo' ]
-
 const args = argly
     .createParser({
         '--user -u': 'string',
         '--pass -p': 'string',
         '--owner -o': 'string',
-        '--repo -r': 'string'
+        '--repo -r': 'string',
+        '--message -m': 'string',
+        '--repoFile -z': 'string',
+        '--localFile -x': 'string',
     })
     .usage('Usage: $0 [options]')
     .example(
         '$0 -u james.beavers@inin.com -p some_s1ck_pass -o Druotic -r greenkeeper-testing-bitbucket'
+    )
+    .example(
+        '$0 -u james.beavers@inin.com -p some_s1ck_pass -o Druotic -r greenkeeper-testing-bitbucket -z repoFileLocation -x localFileLocation'
     )
     .validate(function (args) {
         REQUIRED_ARGS.forEach(requiredArg => {
@@ -27,6 +31,9 @@ const args = argly
 
 bitbucket.setAuth(args.user, args.pass)
 
-// projectName/owner, repo, fromBranch, branchName
-bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
-    .then(body => console.log('branch created!'))
+if (args.repoFile && args.localFile) {
+    return bitbucket.commit.create(args.owner, args.repo, args.message, [{repoLocation: args.repoFile, localLocation: args.localFile}]);
+} else {
+    return bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
+        .then(body => console.log('branch created!'))
+}

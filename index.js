@@ -17,12 +17,11 @@ function loadLibs (self) {
 
 class BitbucketAPI {
     constructor(username, password) {
-      if (!username || !password) {
-         throw new Error('credentials required');
-      }
-      
-      this.setAuth(username, password);
-      loadLibs(this);
+        if (username || password) {
+            this.setAuth(username, password);
+        }
+    
+        loadLibs(this);
     }
 
     setAuth(username, password){
