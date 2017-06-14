@@ -31,12 +31,22 @@ const args = argly
 
 bitbucket.setAuth(args.user, args.pass)
 
+if (args.localFile) {
+  let options = {
+    tempDir: 'temp',
+    projectName: args.owner,
+    branch: 'lastTimeTesting',
+    file: args.localFile,
+    slug: args.repo
+  };
+  bitbucket.commit.create(options);
+}else {
+  bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
+      .then(body => console.log('branch created!'))
 
-bitbucket.branch.create(args.owner, args.repo, 'master', `runner-test-${Math.random()}`)
-    .then(body => console.log('branch created!'))
+  bitbucket.pullrequest.create(args.owner,args.repo,'master','TESTINGTESTING','wut a cool pr')
+      .then(body => console.log('pr made!'));
 
-bitbucket.pullrequest.create(args.owner,args.repo,'master','TESTINGTESTING','wut a cool pr')
-    .then(body => console.log('pr made!'));
-
-bitbucket.issue.create(args.owner, args.repo, 'test', 'also a test')
-    .then(body => console.log('created issue!'));
+  bitbucket.issue.create(args.owner, args.repo, 'test', 'also a test')
+      .then(body => console.log('created issue!'));
+}
